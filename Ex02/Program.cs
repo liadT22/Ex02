@@ -9,16 +9,16 @@ namespace Ex02
         public static void Main()
         {
             int number = 8;
-            eBoxStatuses[,] mBoxStatusMatrix = new eBoxStatuses[number, number];
-            mBoxStatusMatrix[0, 0] = eBoxStatuses.PlayerOne;
-            mBoxStatusMatrix[0, 7] = eBoxStatuses.PlayerOne;
-            mBoxStatusMatrix[7, 0] = eBoxStatuses.PlayerOne;
-            mBoxStatusMatrix[7, 7] = eBoxStatuses.PlayerOne;
-            mBoxStatusMatrix[3, 3] = eBoxStatuses.PlayerOne;
-            mBoxStatusMatrix[4, 4] = eBoxStatuses.PlayerOne;
-            mBoxStatusMatrix[4, 3] = eBoxStatuses.PlayerTwo;
-            mBoxStatusMatrix[3, 4] = eBoxStatuses.PlayerTwo;
-            GameUI.PrintBox(mBoxStatusMatrix, 8);
+            GameData game = new GameData(number, false);
+            game.mBoxStatusMatrix[0, 0] = eBoxStatuses.PlayerOne;
+            game.mBoxStatusMatrix[0, 7] = eBoxStatuses.PlayerOne;
+            game.mBoxStatusMatrix[7, 0] = eBoxStatuses.PlayerOne;
+            game.mBoxStatusMatrix[7, 7] = eBoxStatuses.PlayerOne;
+            game.mBoxStatusMatrix[3, 3] = eBoxStatuses.PlayerOne;
+            game.mBoxStatusMatrix[4, 4] = eBoxStatuses.PlayerOne;
+            game.mBoxStatusMatrix[4, 3] = eBoxStatuses.PlayerTwo;
+            game.mBoxStatusMatrix[3, 4] = eBoxStatuses.PlayerTwo;
+            GameUI.PrintBox(game.mBoxStatusMatrix, 8);
             Console.ReadLine();
         }
     }

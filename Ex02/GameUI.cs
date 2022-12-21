@@ -14,12 +14,12 @@ namespace Ex02
                 {
                     if (i == 0)
                     {
-                        Console.Write(format: "  {0} ", topBoardLetter);
+                        Console.Write(string.Format("  {0} ", topBoardLetter));
                         topBoardLetter++;
                     }
                     else if (k == 0)
                     {
-                        Console.Write(format: " {0}  |", i);
+                        Console.Write(string.Format(" {0}  |", i));
                         printBoxStatus(i_BoxStatusMatrix[i - 1, k]);
                     }
                     else
