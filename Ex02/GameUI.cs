@@ -2,7 +2,7 @@
 
 namespace Ex02
 {
-    internal class GameUI
+    public class GameUI
     {
         public static void PrintBox(eBoxStatuses[,] i_BoxStatusMatrix, int i_BoardSize)
         {
