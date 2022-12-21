@@ -2,7 +2,7 @@
 
 namespace Ex02
 {
-    internal class GameData
+    public class GameData
     {
         public int mBoardSize;
         public eBoxStatuses[,] mBoxStatusMatrix;
