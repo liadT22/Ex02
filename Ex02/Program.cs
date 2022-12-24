@@ -8,15 +8,8 @@ namespace Ex02
     {
         public static void Main()
         {
-            GameManager newGame = new GameManager();
+            GameManager.StartGame();
             Console.ReadLine();
         }
-    }
-
-    public enum eBoxStatuses
-    {
-        Natural,
-        PlayerOne,
-        PlayerTwo
     }
 }
