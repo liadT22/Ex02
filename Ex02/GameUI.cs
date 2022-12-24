@@ -4,13 +4,13 @@ namespace Ex02
 {
     public class GameUI
     {
-        public static void PrintBox(eBoxStatuses[,] i_BoxStatusMatrix, int i_BoardSize)
+        public static void PrintBox(GameData i_data)
         {
             char topBoardLetter = 'A';
             Console.Write("    ");
-            for (int i = 0; i <= i_BoardSize; i++)
+            for (int i = 0; i <= i_data.BoardSize; i++)
             {
-                for (int k = 0; k < i_BoardSize; k++)
+                for (int k = 0; k < i_data.BoardSize; k++)
                 {
                     if (i == 0)
                     {
@@ -20,16 +20,22 @@ namespace Ex02
                     else if (k == 0)
                     {
                         Console.Write(string.Format(" {0}  |", i));
-                        printBoxStatus(i_BoxStatusMatrix[i - 1, k]);
+                        printBoxStatus(i_data.BoxStatusMatrix[i - 1, k]);
                     }
                     else
                     {
-                        printBoxStatus(i_BoxStatusMatrix[i - 1, k]);
+                        printBoxStatus(i_data.BoxStatusMatrix[i - 1, k]);
                     }
                 }
 
                 Console.WriteLine();
-                Console.WriteLine("    =================================");
+                Console.Write("    ");
+                for (int j = 0; j < i_data.BoardSize; j++)
+                {
+                    Console.Write("====");
+                }
+
+                Console.WriteLine("=");
             }
         }
 
@@ -41,10 +47,10 @@ namespace Ex02
                     Console.Write("   |");
                     break;
                 case eBoxStatuses.PlayerOne:
-                    Console.Write(" X |");
+                    Console.Write(" O |");
                     break;
                 case eBoxStatuses.PlayerTwo:
-                    Console.Write(" O |");
+                    Console.Write(" X |");
                     break;
             }
         }

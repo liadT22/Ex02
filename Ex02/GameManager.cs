@@ -4,17 +4,12 @@ namespace Ex02
 {
     internal class GameManager
     {
-        GameData game = null;
-
-        public GameManager()
+        public static void StartGame()
         {
-            string nameOfPlayer1, nameOfPlayer2;
-            bool isPlayerTwoComputer;
-            int gameSize;
-            GameInit.Initial(out nameOfPlayer1, out nameOfPlayer2, out isPlayerTwoComputer, out gameSize);
-            this.game = new GameData(gameSize, isPlayerTwoComputer);
-            GameUI.PrintBox(game.mBoxStatusMatrix, game.mBoardSize);
+            GameData data = GameChatUI.Initial();
+            Console.WriteLine("Player 1: " + data.PlayerOneName);
+            Console.WriteLine("Player 2: " + data.PlayerTwoName);
+            GameUI.PrintBox(data);
         }
-
     }
 }
