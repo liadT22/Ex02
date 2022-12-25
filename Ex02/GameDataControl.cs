@@ -71,10 +71,22 @@ namespace Ex02
 
         private static eBoxStatuses[,] convertLeft(int i_I, int i_K, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
         {
-            while (i_K > 0 && i_BoxStatusesMatrix[i_I,i_K - 1] == i_OtherPlayer)
+            if (i_K > 0)
             {
-                i_BoxStatusesMatrix[i_I, i_K - 1] = i_CurrentPlayer;
-                i_K--;
+                int j = i_K;
+                while (j > 0 && i_BoxStatusesMatrix[i_I, j - 1] == i_OtherPlayer)
+                {
+                    j--;
+                }
+
+                if (i_BoxStatusesMatrix[i_I, j - 1] == i_CurrentPlayer)
+                {
+                    while (j < i_K)
+                    {
+                        i_BoxStatusesMatrix[i_I, j] = i_CurrentPlayer;
+                        j++;
+                    }
+                }
             }
 
             return i_BoxStatusesMatrix;
@@ -82,10 +94,22 @@ namespace Ex02
 
         private static eBoxStatuses[,] convertRight(int i_I, int i_K, int i_BoardSize, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
         {
-            while (i_K < i_BoardSize - 1 && i_BoxStatusesMatrix[i_I, i_K + 1] == i_OtherPlayer)
+            if (i_K < i_BoardSize - 1)
             {
-                i_BoxStatusesMatrix[i_I, i_K + 1] = i_CurrentPlayer;
-                i_K++;
+                int j = i_K;
+                while (j < i_BoardSize - 1 && i_BoxStatusesMatrix[i_I, j + 1] == i_OtherPlayer)
+                {
+                    j++;
+                }
+
+                if (i_BoxStatusesMatrix[i_I, j + 1] == i_CurrentPlayer)
+                {
+                    while (j > i_K)
+                    {
+                        i_BoxStatusesMatrix[i_I, j] = i_CurrentPlayer;
+                        j--;
+                    }
+                }
             }
 
             return i_BoxStatusesMatrix;
@@ -93,10 +117,23 @@ namespace Ex02
 
         private static eBoxStatuses[,] convertUp(int i_I, int i_K, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
         {
-            while (i_I > 0 && i_BoxStatusesMatrix[i_I - 1, i_K] == i_OtherPlayer)
+            if (i_I > 0)
             {
-                i_BoxStatusesMatrix[i_I - 1, i_K] = i_CurrentPlayer;
-                i_I--;
+                int j = i_I;
+                while (j > 0 && i_BoxStatusesMatrix[j - 1, i_K] == i_OtherPlayer)
+                {
+                    i_BoxStatusesMatrix[j - 1, i_K] = i_CurrentPlayer;
+                    j--;
+                }
+
+                if (i_BoxStatusesMatrix[j - 1, i_K] == i_CurrentPlayer)
+                {
+                    while (j < i_I)
+                    {
+                        i_BoxStatusesMatrix[j, i_K] = i_CurrentPlayer;
+                        j++;
+                    }
+                }
             }
 
             return i_BoxStatusesMatrix;
@@ -104,10 +141,23 @@ namespace Ex02
 
         private static eBoxStatuses[,] convertDown(int i_I, int i_K, int i_BoardSize, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
         {
-            while (i_I < i_BoardSize - 1 && i_BoxStatusesMatrix[i_I + 1, i_K] == i_OtherPlayer)
+            if (i_I < i_BoardSize - 1)
             {
-                i_BoxStatusesMatrix[i_I + 1, i_K] = i_CurrentPlayer;
-                i_I++;
+                int j = i_I;
+                while (j < i_BoardSize - 1 && i_BoxStatusesMatrix[j + 1, i_K] == i_OtherPlayer)
+                {
+                    i_BoxStatusesMatrix[j + 1, i_K] = i_CurrentPlayer;
+                    j++;
+                }
+
+                if (i_BoxStatusesMatrix[j + 1, i_K] == i_CurrentPlayer)
+                {
+                    while (j > i_I)
+                    {
+                        i_BoxStatusesMatrix[j, i_K] = i_CurrentPlayer;
+                        j--;
+                    }
+                }
             }
 
             return i_BoxStatusesMatrix;
@@ -268,7 +318,7 @@ namespace Ex02
         private static bool isUpValidMove(int i_I, int i_K, int i_BoardSize, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
         {
             bool isValidMove = false;
-            if (i_BoxStatusesMatrix[i_I - 1, i_K + 1] == eBoxStatuses.Natural)
+            if (i_BoxStatusesMatrix[i_I - 1, i_K] == eBoxStatuses.Natural)
             {
                 do
                 {
