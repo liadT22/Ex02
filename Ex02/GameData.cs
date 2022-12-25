@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ex02
+﻿namespace Ex02
 {
     public class GameData
     {
@@ -14,21 +12,7 @@ namespace Ex02
             }
         }
 
-        private eBoxStatuses[,] m_BoxStatusMatrix;
-
-        public eBoxStatuses[,] BoxStatusMatrix
-        {
-            get
-            {
-                return this.m_BoxStatusMatrix;
-            }
-
-            set
-            {
-                this.m_BoxStatusMatrix = value;
-            }
-        }
-
+        internal eBoxStatuses[,] m_BoxStatusMatrix;
         private string m_PlayerOneName;
 
         public string PlayerOneName
@@ -77,30 +61,7 @@ namespace Ex02
             }
         }
 
-        private eTurns m_PlayerTurn;
-
-        public eTurns PlayerTurn
-        {
-            get
-            {
-                if (this.m_PlayerTurn == eTurns.PlayerOneTurn)
-                {
-                    this.m_PlayerTurn = eTurns.PlayerTwoTurn;
-                    return eTurns.PlayerOneTurn;
-                }
-                else
-                {
-                    this.m_PlayerTurn = eTurns.PlayerOneTurn;
-                    return eTurns.PlayerTwoTurn;
-                }
-            }
-
-            set
-            {
-                this.m_PlayerTurn = value;
-            }
-        }
-
+        internal eTurns m_PlayerTurn;
         private bool m_IsPlayerTwoComputer;
 
         public bool IsPlayerTwoComputer
@@ -110,12 +71,17 @@ namespace Ex02
 
         public GameData(int i_BoardSize, bool i_IsPlayerTwoComputer, string i_PlayerOneName, string i_PlayerTwoName)
         {
-            this.m_BoardSize = i_BoardSize; // maybe remove?
+            this.m_BoardSize = i_BoardSize;
             this.m_BoxStatusMatrix = initBoard(i_BoardSize);
             this.m_IsPlayerTwoComputer = i_IsPlayerTwoComputer;
             this.m_PlayerTurn = eTurns.PlayerOneTurn;
             this.PlayerOneName = i_PlayerOneName;
             this.PlayerTwoName = i_PlayerTwoName;
+        }
+
+        public void ChangeTurn()
+        {
+            this.m_PlayerTurn = this.m_PlayerTurn == eTurns.PlayerOneTurn ? eTurns.PlayerTwoTurn : eTurns.PlayerOneTurn;
         }
 
         private static eBoxStatuses[,] initBoard(int i_boardSize)
@@ -129,13 +95,13 @@ namespace Ex02
         }
     }
 
-    public enum eTurns
+    internal enum eTurns
     {
         PlayerOneTurn,
         PlayerTwoTurn
     }
 
-    public enum eBoxStatuses
+    internal enum eBoxStatuses
     {
         Natural,
         PlayerOne,

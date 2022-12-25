@@ -32,9 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GameDataControl.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="GameChatUI.cs" />
-    <Compile Include="GameManager.cs" />
+    <Compile Include="SystemControl.cs" />
     <Compile Include="GameUI.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
