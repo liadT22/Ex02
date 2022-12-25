@@ -4,7 +4,7 @@ namespace Ex02
 {
     public class GameUI
     {
-        public static void PrintBox(GameData i_data)
+        public static void PrintBoard(GameData i_data)
         {
             ConsoleUtils.Screen.Clear();
             Console.WriteLine(string.Format("Player 1: {0} O, Player 2: {1} X", i_data.PlayerOneName, i_data.PlayerTwoName));

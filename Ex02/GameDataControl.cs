@@ -67,6 +67,10 @@ namespace Ex02
             {
                 isExistingMove = true;
             }
+            else
+            {
+                this.m_WasExistingMovesChecked = false;
+            }
 
             return isExistingMove;
         }
@@ -85,12 +89,48 @@ namespace Ex02
             return i_Data;
         }
 
+        public string CalcWinner(GameData i_Data, out int io_PlayerOneScore, out int io_PlayerTwoScore, out bool o_IsTie)
+        {
+            io_PlayerOneScore = 0;
+            io_PlayerTwoScore = 0;
+            string winnerName;
+            o_IsTie = false;
+            foreach (eBoxStatuses currentBox in i_Data.m_BoxStatusMatrix)
+            {
+                if (currentBox == eBoxStatuses.PlayerOne)
+                {
+                    io_PlayerOneScore++;
+                }
+
+                if (currentBox == eBoxStatuses.PlayerTwo)
+                {
+                    io_PlayerTwoScore++;
+                }
+            }
+
+            if (io_PlayerOneScore == io_PlayerTwoScore)
+            {
+                o_IsTie = true;
+                winnerName = null;
+            }
+            else if (io_PlayerOneScore >= io_PlayerTwoScore)
+            {
+                winnerName = i_Data.PlayerOneName;
+            }
+            else
+            {
+                winnerName = i_Data.PlayerTwoName;
+            }
+
+            return winnerName;
+        }
+
         private static eBoxStatuses[,] convertLeft(int i_I, int i_K, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
         {
             if (i_K > 0)
             {
                 int j = i_K;
-                while (j > 0 && i_BoxStatusesMatrix[i_I, j - 1] == i_OtherPlayer)
+                while (j > 1 && i_BoxStatusesMatrix[i_I, j - 1] == i_OtherPlayer)
                 {
                     j--;
                 }
@@ -113,7 +153,7 @@ namespace Ex02
             if (i_K < i_BoardSize - 1)
             {
                 int j = i_K;
-                while (j < i_BoardSize - 1 && i_BoxStatusesMatrix[i_I, j + 1] == i_OtherPlayer)
+                while (j < i_BoardSize - 2 && i_BoxStatusesMatrix[i_I, j + 1] == i_OtherPlayer)
                 {
                     j++;
                 }
@@ -136,7 +176,7 @@ namespace Ex02
             if (i_I > 0)
             {
                 int j = i_I;
-                while (j > 0 && i_BoxStatusesMatrix[j - 1, i_K] == i_OtherPlayer)
+                while (j > 1 && i_BoxStatusesMatrix[j - 1, i_K] == i_OtherPlayer)
                 {
                     j--;
                 }
@@ -159,7 +199,7 @@ namespace Ex02
             if (i_I < i_BoardSize - 1)
             {
                 int j = i_I;
-                while (j < i_BoardSize - 1 && i_BoxStatusesMatrix[j + 1, i_K] == i_OtherPlayer)
+                while (j < i_BoardSize - 2 && i_BoxStatusesMatrix[j + 1, i_K] == i_OtherPlayer)
                 {
                     j++;
                 }
