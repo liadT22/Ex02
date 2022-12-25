@@ -10,6 +10,8 @@ namespace Ex02
             Console.WriteLine("Player 1: " + data.PlayerOneName);
             Console.WriteLine("Player 2: " + data.PlayerTwoName);
             GameUI.PrintBox(data);
+            string move = GameChatUI.AskPlayerForMove(data);
+            Console.WriteLine(move);
         }
     }
 }

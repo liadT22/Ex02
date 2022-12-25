@@ -70,5 +70,74 @@ namespace Ex02
 
             return new GameData(boardSize, isPlayerTwoComputer, nameOfPlayer1, nameOfPlayer2);
         }
+
+        public static string AskPlayerForMove(GameData i_GameData)
+        {
+            string playerMove;
+            if (i_GameData.PlayerTurn == eTurns.PlayerOneTurn)
+            {
+                return getValidMove(i_GameData.PlayerOneName, i_GameData.BoardSize);
+            }
+            else
+            {
+                return getValidMove(i_GameData.PlayerTwoName, i_GameData.BoardSize);
+            }
+        }
+
+        private static string getValidMove(string i_PlayerName, int i_BoardSize)
+        {
+            string playerMove;
+            string exitGameChar = "Q";
+            bool isValidMove = false;
+            Console.WriteLine(string.Format(
+                    @"Hello {0}, what is your move?
+Your move must be a letter and a number that fit the board (IE: a2, B3, etc...)
+(Note: you can also Type {1} to exit)", i_PlayerName, exitGameChar));
+            playerMove = Console.ReadLine();
+            if (playerMove == exitGameChar || playerMove == exitGameChar.ToLower())
+            {
+                playerMove = playerMove.ToUpper();
+                isValidMove = true;
+            }
+
+            while (isValidMove == false)
+            {
+                isValidMove = true;
+                if (playerMove.Length != 2)
+                {
+                    Console.WriteLine("Please enter a valid move (IE: a2, B3, etc....)");
+                    isValidMove = false;
+                }
+                else
+                {
+                    playerMove = playerMove.ToUpper();
+                    if (char.IsDigit(playerMove[1]) == false || (playerMove[1] < '1' || playerMove[1] >= (char)('1' + i_BoardSize)))
+                    {
+                        Console.WriteLine("Please make sure your second input is a valid digit!");
+                        isValidMove = false;
+                    }
+                }
+
+                if (char.IsLetter(playerMove[0]) == false || (playerMove[0] < 'A' || playerMove[0] >= (char)('A' + i_BoardSize)))
+                {
+                    Console.WriteLine("Please make sure your first input is a valid letter!");
+                    isValidMove = false;
+                }
+
+                if (isValidMove == false)
+                {
+                    Console.WriteLine("Please enter your move again:");
+                    playerMove = Console.ReadLine();
+                }
+
+                if (playerMove == exitGameChar || playerMove == exitGameChar.ToLower())
+                {
+                    playerMove = playerMove.ToUpper();
+                    isValidMove = true;
+                }
+            }
+
+            return playerMove;
+        }
     }
 }
