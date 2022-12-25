@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ex02
 {
@@ -48,6 +49,7 @@ namespace Ex02
                 i_Data.m_BoxStatusMatrix = convertUp(row, column, i_Data.m_BoxStatusMatrix, eBoxStatuses.PlayerTwo, eBoxStatuses.PlayerOne);
                 i_Data.m_BoxStatusMatrix = convertDown(row, column, i_Data.BoardSize, i_Data.m_BoxStatusMatrix, eBoxStatuses.PlayerTwo, eBoxStatuses.PlayerOne);
             }
+
             this.m_WasExistingMovesChecked = false;
             return i_Data;
         }
@@ -67,6 +69,20 @@ namespace Ex02
             }
 
             return isExistingMove;
+        }
+
+        public GameData ComputerTurn(GameData i_Data)
+        {
+            int amountOfExistingMoves;
+            Random random = new Random();
+            if (this.AnyExistingMove(i_Data))
+            {
+                amountOfExistingMoves = this.m_ExistingMovesForCurrentPlayer.Count;
+                i_Data = this.EnterMoveToData(i_Data, this.m_ExistingMovesForCurrentPlayer[random.Next(0, amountOfExistingMoves - 1)]);
+                this.m_WasExistingMovesChecked = false;
+            }
+
+            return i_Data;
         }
 
         private static eBoxStatuses[,] convertLeft(int i_I, int i_K, eBoxStatuses[,] i_BoxStatusesMatrix, eBoxStatuses i_CurrentPlayer, eBoxStatuses i_OtherPlayer)
@@ -122,7 +138,6 @@ namespace Ex02
                 int j = i_I;
                 while (j > 0 && i_BoxStatusesMatrix[j - 1, i_K] == i_OtherPlayer)
                 {
-                    i_BoxStatusesMatrix[j - 1, i_K] = i_CurrentPlayer;
                     j--;
                 }
 
@@ -146,7 +161,6 @@ namespace Ex02
                 int j = i_I;
                 while (j < i_BoardSize - 1 && i_BoxStatusesMatrix[j + 1, i_K] == i_OtherPlayer)
                 {
-                    i_BoxStatusesMatrix[j + 1, i_K] = i_CurrentPlayer;
                     j++;
                 }
 

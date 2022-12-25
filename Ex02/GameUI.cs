@@ -7,6 +7,7 @@ namespace Ex02
         public static void PrintBox(GameData i_data)
         {
             ConsoleUtils.Screen.Clear();
+            Console.WriteLine(string.Format("Player 1: {0} O, Player 2: {1} X", i_data.PlayerOneName, i_data.PlayerTwoName));
             char topBoardLetter = 'A';
             Console.Write("    ");
             for (int i = 0; i <= i_data.BoardSize; i++)
