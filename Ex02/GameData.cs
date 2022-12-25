@@ -77,15 +77,43 @@ namespace Ex02
             }
         }
 
-        private bool m_PlayerTurn;
+        private eTurns m_PlayerTurn;
+
+        public eTurns PlayerTurn
+        {
+            get
+            {
+                if (this.m_PlayerTurn == eTurns.PlayerOneTurn)
+                {
+                    this.m_PlayerTurn = eTurns.PlayerTwoTurn;
+                    return eTurns.PlayerOneTurn;
+                }
+                else
+                {
+                    this.m_PlayerTurn = eTurns.PlayerOneTurn;
+                    return eTurns.PlayerTwoTurn;
+                }
+            }
+
+            set
+            {
+                this.m_PlayerTurn = value;
+            }
+        }
+
         private bool m_IsPlayerTwoComputer;
+
+        public bool IsPlayerTwoComputer
+        {
+            get { return this.m_IsPlayerTwoComputer; }
+        }
 
         public GameData(int i_BoardSize, bool i_IsPlayerTwoComputer, string i_PlayerOneName, string i_PlayerTwoName)
         {
             this.m_BoardSize = i_BoardSize; // maybe remove?
             this.m_BoxStatusMatrix = initBoard(i_BoardSize);
             this.m_IsPlayerTwoComputer = i_IsPlayerTwoComputer;
-            this.m_PlayerTurn = false;
+            this.m_PlayerTurn = eTurns.PlayerOneTurn;
             this.PlayerOneName = i_PlayerOneName;
             this.PlayerTwoName = i_PlayerTwoName;
         }
@@ -99,6 +127,12 @@ namespace Ex02
             boxStatusMatrix[i_boardSize / 2, (i_boardSize / 2) - 1] = eBoxStatuses.PlayerTwo;
             return boxStatusMatrix;
         }
+    }
+
+    public enum eTurns
+    {
+        PlayerOneTurn,
+        PlayerTwoTurn
     }
 
     public enum eBoxStatuses
