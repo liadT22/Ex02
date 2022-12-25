@@ -71,10 +71,10 @@ namespace Ex02
             return new GameData(boardSize, isPlayerTwoComputer, nameOfPlayer1, nameOfPlayer2);
         }
 
-        public static string AskPlayerForMove(GameData i_GameData)
+        public static string AskCurrentPlayerForMove(GameData i_GameData)
         {
             string playerMove;
-            if (i_GameData.PlayerTurn == eTurns.PlayerOneTurn)
+            if (i_GameData.m_PlayerTurn == eTurns.PlayerOneTurn)
             {
                 return getValidMove(i_GameData.PlayerOneName, i_GameData.BoardSize);
             }

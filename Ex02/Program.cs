@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ex02
 {
@@ -8,7 +6,7 @@ namespace Ex02
     {
         public static void Main()
         {
-            GameManager.StartGame();
+            SystemControl.StartGame();
             Console.ReadLine();
         }
     }

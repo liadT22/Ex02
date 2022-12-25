@@ -20,11 +20,11 @@ namespace Ex02
                     else if (k == 0)
                     {
                         Console.Write(string.Format(" {0}  |", i));
-                        printBoxStatus(i_data.BoxStatusMatrix[i - 1, k]);
+                        printBoxStatus(i_data.m_BoxStatusMatrix[i - 1, k]);
                     }
                     else
                     {
-                        printBoxStatus(i_data.BoxStatusMatrix[i - 1, k]);
+                        printBoxStatus(i_data.m_BoxStatusMatrix[i - 1, k]);
                     }
                 }
 
