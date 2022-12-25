@@ -116,24 +116,23 @@ Your move must be a letter and a number that fit the board (IE: a2, B3, etc...)
                         Console.WriteLine("Please make sure your second input is a valid digit!");
                         isValidMove = false;
                     }
-                }
 
-                if (char.IsLetter(playerMove[0]) == false || (playerMove[0] < 'A' || playerMove[0] >= (char)('A' + i_BoardSize)))
-                {
-                    Console.WriteLine("Please make sure your first input is a valid letter!");
-                    isValidMove = false;
-                }
-
-                if (isValidMove == false)
-                {
-                    Console.WriteLine("Please enter your move again:");
-                    playerMove = Console.ReadLine();
+                    if (char.IsLetter(playerMove[0]) == false || (playerMove[0] < 'A' || playerMove[0] >= (char)('A' + i_BoardSize)))
+                    {
+                        Console.WriteLine("Please make sure your first input is a valid letter!");
+                        isValidMove = false;
+                    }
                 }
 
                 if (playerMove == exitGameChar || playerMove == exitGameChar.ToLower())
                 {
                     playerMove = playerMove.ToUpper();
                     isValidMove = true;
+                }
+                else if (isValidMove == false)
+                {
+                    Console.WriteLine("Please enter your move again:");
+                    playerMove = Console.ReadLine();
                 }
             }
 

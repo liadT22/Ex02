@@ -19,6 +19,12 @@ namespace Ex02
                 {
                     gameData = gameDataControl.EnterMoveToData(gameData, move);
                     gameData.ChangeTurn();
+                    if (gameData.IsPlayerTwoComputer)
+                    {
+                        gameData = gameDataControl.ComputerTurn(gameData);
+                        gameData.ChangeTurn();
+                    }
+
                     GameUI.PrintBox(gameData);
                 }
             }

@@ -76,7 +76,14 @@
             this.m_IsPlayerTwoComputer = i_IsPlayerTwoComputer;
             this.m_PlayerTurn = eTurns.PlayerOneTurn;
             this.PlayerOneName = i_PlayerOneName;
-            this.PlayerTwoName = i_PlayerTwoName;
+            if (i_IsPlayerTwoComputer)
+            {
+                this.PlayerTwoName = "Mr. computer";
+            }
+            else
+            {
+                this.PlayerTwoName = i_PlayerTwoName;
+            }
         }
 
         public void ChangeTurn()
