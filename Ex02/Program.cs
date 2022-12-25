@@ -7,7 +7,6 @@ namespace Ex02
         public static void Main()
         {
             SystemControl.StartGame();
-            Console.ReadLine();
         }
     }
 }

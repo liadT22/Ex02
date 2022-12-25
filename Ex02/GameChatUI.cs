@@ -11,6 +11,7 @@ namespace Ex02
             string nameOfPlayer1;
             string nameOfPlayer2 = null;
             string playerChoice;
+            ConsoleUtils.Screen.Clear();
             Console.WriteLine("Enter player 1 name: ");
             nameOfPlayer1 = Console.ReadLine();
             while (nameOfPlayer1 == string.Empty)
@@ -76,25 +77,75 @@ namespace Ex02
             string playerMove;
             if (i_GameData.m_PlayerTurn == eTurns.PlayerOneTurn)
             {
-                return getValidMove(i_GameData.PlayerOneName, i_GameData.BoardSize);
+                playerMove = getValidMove(i_GameData.PlayerOneName, i_GameData.BoardSize);
             }
             else
             {
-                return getValidMove(i_GameData.PlayerTwoName, i_GameData.BoardSize);
+                playerMove = getValidMove(i_GameData.PlayerTwoName, i_GameData.BoardSize);
             }
+
+            return playerMove;
+        }
+
+        public static void IllegalMoveInput(string i_Move)
+        {
+            Console.WriteLine(string.Format(
+                "{0} is not one of your options as a move, look again at the board and enter a new move", i_Move));
+        }
+
+        public static void OutOfMovesForCurrentPlayer(string i_CurrentPlayerName)
+        {
+            Console.WriteLine(string.Format("It looks like {0} doesn't have any legal move to make", i_CurrentPlayerName));
+        }
+
+        public static bool GameOverAndCheckRestart(string i_winnerName, bool i_IsTie, int i_PlayerOneScore, int i_PlayerTwoScore)
+        {
+            bool isNewGame = false;
+            string playerChoice;
+            if (i_IsTie)
+            {
+                Console.WriteLine(string.Format(
+                @"It's a tie! so no winners..
+you are both with {0} points.
+Would you like to play another game?
+1. Yes -> Choose 1
+2. No -> Choose 2", i_PlayerOneScore));
+            }
+            else
+            {
+                Console.WriteLine(string.Format(
+                @"congratulations {0}! You are the winner!
+Player 1 with: {1} points, and Player 2 with {2} points.
+Would you like to play another game?
+1. Yes -> Choose 1
+2. No -> Choose 2", i_winnerName, i_PlayerOneScore, i_PlayerTwoScore));
+            }
+
+            playerChoice = Console.ReadLine();
+            while (playerChoice != "1" && playerChoice != "2")
+            {
+                Console.WriteLine("Please Enter valid value");
+                playerChoice = Console.ReadLine();
+            }
+
+            if (playerChoice == "1")
+            {
+                isNewGame = true;
+            }
+
+            return isNewGame;
         }
 
         private static string getValidMove(string i_PlayerName, int i_BoardSize)
         {
             string playerMove;
-            string exitGameChar = "Q";
             bool isValidMove = false;
             Console.WriteLine(string.Format(
                     @"Hello {0}, what is your move?
 Your move must be a letter and a number that fit the board (IE: a2, B3, etc...)
-(Note: you can also Type {1} to exit)", i_PlayerName, exitGameChar));
+(Note: you can also Type {1} to exit)", i_PlayerName, Global.v_ExitGame));
             playerMove = Console.ReadLine();
-            if (playerMove == exitGameChar || playerMove == exitGameChar.ToLower())
+            if (playerMove == Global.v_ExitGame || playerMove == Global.v_ExitGame.ToLower())
             {
                 playerMove = playerMove.ToUpper();
                 isValidMove = true;
@@ -124,7 +175,7 @@ Your move must be a letter and a number that fit the board (IE: a2, B3, etc...)
                     }
                 }
 
-                if (playerMove == exitGameChar || playerMove == exitGameChar.ToLower())
+                if (playerMove == Global.v_ExitGame || playerMove == Global.v_ExitGame.ToLower())
                 {
                     playerMove = playerMove.ToUpper();
                     isValidMove = true;
