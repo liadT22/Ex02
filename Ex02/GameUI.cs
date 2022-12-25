@@ -6,6 +6,7 @@ namespace Ex02
     {
         public static void PrintBox(GameData i_data)
         {
+            ConsoleUtils.Screen.Clear();
             char topBoardLetter = 'A';
             Console.Write("    ");
             for (int i = 0; i <= i_data.BoardSize; i++)
